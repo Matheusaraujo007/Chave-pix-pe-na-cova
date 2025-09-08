@@ -26,28 +26,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Imagens laterais grandes e visíveis */
-    .side-image {
-      position: absolute;
-      top: 0;
-      height: 100%;
-      width: 250px; /* agora mais largo */
-      background-size: cover;
-      background-position: center;
-      opacity: 0.4; /* leve transparência */
-      z-index: 0;
-    }
-
-    .side-left {
-      left: 0;
-      background-image: url('log1.png'); /* coloque o caminho correto da imagem */
-    }
-
-    .side-right {
-      right: 0;
-      background-image: url('log2.png'); /* coloque o caminho correto da imagem */
-    }
-
     .card {
       position: relative;
       background: rgba(255, 255, 255, 0.95);
@@ -92,7 +70,7 @@
     /* Frase estilizada maior e com brilho */
     .slogan {
       font-family: 'Great Vibes', cursive;
-      font-size: 36px; /* ainda maior para destaque */
+      font-size: 36px;
       color: #333;
       margin-top: 10px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -109,14 +87,43 @@
       margin: 20px auto;
     }
 
+    /* Container da chave PIX com imagens laterais */
+    .pix-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
     .pix-key {
       font-size: 14px;
       background: #e0e0e0;
-      padding: 10px;
+      padding: 10px 20px;
       border-radius: 8px;
-      word-break: break-all;
-      margin-bottom: 10px;
       color: #222;
+      z-index: 2;
+      position: relative;
+    }
+
+    .side-left-pix,
+    .side-right-pix {
+      width: 50px;
+      height: 80px;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    .side-left-pix {
+      background-image: url('log1.png'); /* coloque caminho correto */
+      margin-right: 10px;
+    }
+
+    .side-right-pix {
+      background-image: url('log2.png'); /* coloque caminho correto */
+      margin-left: 10px;
     }
 
     button {
@@ -174,10 +181,6 @@
 </head>
 <body>
 
-  <!-- Imagens laterais -->
-  <div class="side-image side-left"></div>
-  <div class="side-image side-right"></div>
-
   <div class="overlay" id="overlay"></div>
 
   <div class="card">
@@ -193,7 +196,13 @@
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=91984315149" alt="QR Code PIX">
     </div>
 
-    <div class="pix-key" id="pixKey">Chave Pix: 91984315149</div>
+    <!-- Container da chave PIX com imagens laterais -->
+    <div class="pix-container">
+      <div class="side-left-pix"></div>
+      <div class="pix-key" id="pixKey">Chave Pix: 91984315149</div>
+      <div class="side-right-pix"></div>
+    </div>
+
     <button onclick="copyPix()">📋 Copiar Chave PIX</button>
   </div>
 
