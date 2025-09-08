@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão de Visita - Pé na Cova</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #d6d6d6, #b0b0b0, #e0e0e0);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      position: relative;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Imagens laterais grandes e visíveis */
+    .side-image {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 250px; /* agora mais largo */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4; /* leve transparência */
+      z-index: 0;
+    }
+
+    .side-left {
+      left: 0;
+      background-image: url('log1.png'); /* coloque o caminho correto da imagem */
+    }
+
+    .side-right {
+      right: 0;
+      background-image: url('log2.png'); /* coloque o caminho correto da imagem */
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.95);
+      width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 15px auto;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid #888;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card h1 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Frase estilizada maior e com brilho */
+    .slogan {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px; /* ainda maior para destaque */
+      color: #333;
+      margin-top: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 2px #fff, 0 0 5px #ddd; }
+      50% { text-shadow: 0 0 5px #fff, 0 0 15px #bbb; }
+      100% { text-shadow: 0 0 2px #fff, 0 0 5px #ddd; }
+    }
+
+    .qrcode {
+      margin: 20px auto;
+    }
+
+    .pix-key {
+      font-size: 14px;
+      background: #e0e0e0;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-all;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    button {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #333;
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      animation: float 8s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    .money {
+      position: absolute;
+      font-size: 30px;
+      color: #1a8917;
+      animation: rise 3s ease-out forwards;
+      z-index: 3;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Imagens laterais -->
+  <div class="side-image side-left"></div>
+  <div class="side-image side-right"></div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="card">
+    <div class="logo">
+      <img src="logo.png" alt="Logo Pé na Cova">
+    </div>
+
+    <h1>Pé na Cova</h1>
+    <p>Perfumaria & Lingerie</p>
+    <p class="slogan">Revele sua essência, Realce sua beleza</p>
+    
+    <div class="qrcode">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=91984315149" alt="QR Code PIX">
+    </div>
+
+    <div class="pix-key" id="pixKey">Chave Pix: 91984315149</div>
+    <button onclick="copyPix()">📋 Copiar Chave PIX</button>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("overlay");
+    for (let i = 0; i < 20; i++) {
+      const circle = document.createElement("div");
+      const size = Math.random() * 40 + 10;
+      circle.classList.add("circle");
+      circle.style.width = `${size}px`;
+      circle.style.height = `${size}px`;
+      circle.style.left = `${Math.random() * 100}%`;
+      circle.style.animationDuration = `${Math.random() * 6 + 5}s`;
+      overlay.appendChild(circle);
+    }
+
+    function copyPix() {
+      const pixKey = document.getElementById("pixKey").innerText;
+      navigator.clipboard.writeText(pixKey).then(() => {
+        document.getElementById("overlay").style.display = "none";
+        launchMoneyRain();
+      });
+    }
+
+    function launchMoneyRain() {
+      for (let i = 0; i < 50; i++) {
+        const money = document.createElement("div");
+        money.classList.add("money");
+        money.innerText = "💲";
+        money.style.left = `${Math.random() * 100}%`;
+        money.style.top = "100%";
+        money.style.fontSize = `${Math.random() * 20 + 20}px`;
+        money.style.animationDuration = `${Math.random() * 2 + 2}s`;
+        document.body.appendChild(money);
+        setTimeout(() => { money.remove(); }, 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
