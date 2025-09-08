@@ -67,7 +67,6 @@
       color: #555;
     }
 
-    /* Frase estilizada maior e com brilho */
     .slogan {
       font-family: 'Great Vibes', cursive;
       font-size: 36px;
@@ -76,17 +75,31 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
+    /* Destaque da frase "Agora é Pra Valer" */
+    .highlight {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff6700;
+      margin-top: 10px;
+      animation: pulse 1.5s infinite, glow 2s ease-in-out infinite alternate;
+      text-transform: capitalize;
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
     @keyframes glow {
-      0% { text-shadow: 0 0 2px #fff, 0 0 5px #ddd; }
-      50% { text-shadow: 0 0 5px #fff, 0 0 15px #bbb; }
-      100% { text-shadow: 0 0 2px #fff, 0 0 5px #ddd; }
+      0% { text-shadow: 0 0 5px #ff6700, 0 0 10px #ff8c42, 0 0 15px #ffa66b; }
+      100% { text-shadow: 0 0 15px #ff6700, 0 0 30px #ff8c42, 0 0 45px #ffa66b; }
     }
 
     .qrcode {
       margin: 20px auto;
     }
 
-    /* Container da chave PIX com imagens laterais */
     .pix-container {
       position: relative;
       display: flex;
@@ -105,30 +118,6 @@
       position: relative;
     }
 
-    /* Apenas para a frase "Agora é Pra Valer" */
-.highlight {
-  font-size: 24px;           /* tamanho da letra */
-  font-weight: bold;
-  color: #ff6700;            /* laranja neon */
-  margin-top: 10px;
-  animation: pulse 1.5s infinite, glow 2s ease-in-out infinite alternate;
-  text-transform: capitalize; /* deixa a primeira letra de cada palavra maiúscula */
-  letter-spacing: 1px;
-}
-
-/* Efeito de batimento */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-/* Efeito de brilho neon laranja */
-@keyframes glow {
-  0% { text-shadow: 0 0 5px #ff6700, 0 0 10px #ff8c42, 0 0 15px #ffa66b; }
-  100% { text-shadow: 0 0 15px #ff6700, 0 0 30px #ff8c42, 0 0 45px #ffa66b; }
-}
-
-
     .side-left-pix,
     .side-right-pix {
       width: 50px;
@@ -139,15 +128,8 @@
       z-index: 1;
     }
 
-    .side-left-pix {
-      background-image: url('log1.png'); /* coloque caminho correto */
-      margin-right: 10px;
-    }
-
-    .side-right-pix {
-      background-image: url('log2.png'); /* coloque caminho correto */
-      margin-left: 10px;
-    }
+    .side-left-pix { background-image: url('log1.png'); margin-right: 10px; }
+    .side-right-pix { background-image: url('log2.png'); margin-left: 10px; }
 
     button {
       background: #555;
@@ -200,6 +182,23 @@
       0% { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
+
+    /* Mensagem motivacional */
+    .motivation {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      font-weight: bold;
+      color: #000000;
+      text-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000;
+      animation: riseMessage 10.5s ease-out forwards;
+      z-index: 4;
+    }
+
+    @keyframes riseMessage {
+      0% { transform: translate(-50%, 0); opacity: 1; }
+      100% { transform: translate(-50%, -150px); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -220,7 +219,6 @@
       <p class="highlight">Agora é Pra Valer</p>
     </div>
 
-    <!-- Container da chave PIX com imagens laterais -->
     <div class="pix-container">
       <div class="side-left-pix"></div>
       <div class="pix-key" id="pixKey">Chave Pix: 91984315149</div>
@@ -263,8 +261,17 @@
         document.body.appendChild(money);
         setTimeout(() => { money.remove(); }, 3000);
       }
+
+      // Adiciona frase motivacional
+      const message = document.createElement("div");
+      message.classList.add("motivation");
+      message.innerText = "Sucesso vem para quem age!";
+      message.style.left = "50%";
+      message.style.top = "50%";
+      document.body.appendChild(message);
+
+      setTimeout(() => { message.remove(); }, 10500);
     }
   </script>
-
 </body>
 </html>
