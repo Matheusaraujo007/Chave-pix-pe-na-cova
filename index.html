@@ -186,7 +186,7 @@
     /* Mensagem motivacional */
     .motivation {
       position: absolute;
-      transform: translate(-50%, -50%);
+      transform: translate(10%, 10%);
       font-size: 20px;
       font-weight: bold;
       color: #000000;
@@ -197,7 +197,7 @@
 
     @keyframes riseMessage {
       0% { transform: translate(-50%, 0); opacity: 1; }
-      100% { transform: translate(-50%, -150px); opacity: 0; }
+      100% { transform: translate(-50%, -350px); opacity: 0; }
     }
   </style>
 </head>
@@ -270,7 +270,7 @@
       message.style.top = "50%";
       document.body.appendChild(message);
 
-      setTimeout(() => { message.remove(); }, 10500);
+      setTimeout(() => { message.remove(); }, 5500);
     }
   </script>
 </body>
